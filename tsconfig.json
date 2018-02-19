@@ -9,5 +9,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
+    "outDir": "dist/",
+    "rootDir": "src/"
   }
 }
