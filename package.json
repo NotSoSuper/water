@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yuki-bot/water#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "branches": "github:yuki-bot/branches"
   }
 }
