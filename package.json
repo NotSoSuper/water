@@ -1,6 +1,6 @@
 {
   "name": "water",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Discord REST Library",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/yuki-bot/water.git"
   },
-  "author": "moon <me@luna.fyi>",
+  "author": "moon <me@luna.fyi>, Zeyla Hellyer <zeylahellyer@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yuki-bot/water/issues"
   },
-  "homepage": "https://github.com/yuki-bot/water#readme"
+  "homepage": "https://github.com/yuki-bot/water#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
 }
