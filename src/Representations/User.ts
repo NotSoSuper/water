@@ -1,3 +1,3 @@
-export default interface UserRepresentation {
+export default interface User {
 
 }
