@@ -1,4 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
+import Snowflake from './Abstracts/Snowflake';
 import Channel from './Resources/Channel';
 import * as Constants from './Constants';
 import * as Endpoints from './Routing/Endpoints';
@@ -49,7 +50,7 @@ export default class Water {
         this.token = token;
     }
 
-    public getChannel(channelId: string): Promise<Channel> {
+    public getChannel(channelId: Snowflake): Promise<Channel> {
         return this.get(
             Routes.channelsId(channelId),
             Endpoints.channel(channelId),
