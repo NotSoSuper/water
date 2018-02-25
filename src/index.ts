@@ -1,8 +1,9 @@
+import * as Channel from "discord-models/build/channel";
 import * as https from "https";
 import Snowflake from "./Abstracts/Snowflake";
 import * as Constants from "./Constants";
 import RateLimiter from "./RateLimiter";
-import Channel from "./Resources/Channel";
+import * as Resources from "./Resources";
 import * as Endpoints from "./Routing/Endpoints";
 import * as Routes from "./Routing/Routes";
 
@@ -33,8 +34,10 @@ export default class Water {
     /**
      * Creates an instance of Water.
      * @param {string} token
-     * @param {object} [options]
+     * @constructor
      * @memberof Water
+     * @method
+     * @public
      */
     public constructor(token: string) {
         this.innerToken = Water.transformToken(token);
@@ -48,11 +51,13 @@ export default class Water {
         this.token = Water.transformToken(token);
     }
 
-    public getChannel(channelId: Snowflake): Promise<Channel> {
-        return this.get(
+    public async getChannel(channelId: Snowflake): Promise<Resources.Channel> {
+        const response = await this.get<Channel.Channel>(
             Routes.channelsId(channelId),
             Endpoints.channel(channelId),
         );
+
+        return new Resources.Channel(this, response);
     }
 
     protected delete<T>(bucketIdentifier: string, path: string): Promise<T> {

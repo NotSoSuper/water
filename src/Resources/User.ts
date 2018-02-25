@@ -1,14 +1,24 @@
+import { User as UserModel } from "discord-models/build/user";
+import Water from "../";
 import BaseResource from "../Abstracts/BaseResource";
-import UserRepresentation from "../Representations/User";
 
 /**
- *
- *
+ * @class
+ * @default
  * @export
- * @class User
  * @extends {BaseResource}
- * @implements {UserRepresentation}
+ * @name User
+ * @public
  */
-export default class User extends BaseResource implements UserRepresentation {
-
+export default class User extends BaseResource {
+    /**
+     * @param {Water} water
+     * @param {UserModel} data
+     * @constructor
+     * @method
+     * @public
+     */
+    public constructor(water: Water, data: UserModel) {
+        super(water);
+    }
 }

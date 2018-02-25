@@ -1,3 +1,10 @@
+/**
+ * @class
+ * @default
+ * @export
+ * @name Snowflake
+ * @public
+ */
 export default class Snowflake {
     public static fromJSON(value: string) {
         return this.prototype.constructor.call(value);
