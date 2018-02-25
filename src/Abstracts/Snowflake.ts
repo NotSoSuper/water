@@ -1,15 +1,16 @@
 export default class Snowflake {
+    public static fromJSON(value: string) {
+        return this.prototype.constructor.call(value);
+    }
+
     constructor(public value: string) {
     }
 
-    static fromJSON(value: string) {
-        return this.prototype.constructor.call(value);
-    }
-    toJSON() {
+    public toJSON() {
         return this.value;
     }
 
-    toString(): string {
+    public toString(): string {
         return this.value;
     }
 }

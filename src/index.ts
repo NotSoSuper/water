@@ -1,17 +1,17 @@
-import * as https from 'https';
-import Snowflake from './Abstracts/Snowflake';
-import Channel from './Resources/Channel';
-import * as Constants from './Constants';
-import * as Endpoints from './Routing/Endpoints';
-import RateLimiter from './RateLimiter';
-import * as Routes from './Routing/Routes';
+import * as https from "https";
+import Snowflake from "./Abstracts/Snowflake";
+import * as Constants from "./Constants";
+import RateLimiter from "./RateLimiter";
+import Channel from "./Resources/Channel";
+import * as Endpoints from "./Routing/Endpoints";
+import * as Routes from "./Routing/Routes";
 
-type Method = 'delete' | 'get' | 'patch' | 'post' | 'put';
+type Method = "delete" | "get" | "patch" | "post" | "put";
 
 interface RequestHeaders {
     Authorization?: string | undefined;
-    'Content-Type': string;
-    'User-Agent': string;
+    "Content-Type": string;
+    "User-Agent": string;
 }
 
 /**
@@ -19,10 +19,14 @@ interface RequestHeaders {
  * @class Water
  */
 export default class Water {
+    private static transformToken(token: string): string {
+        return token.startsWith("Bot") ? token : `Bot ${token}`;
+    }
+
     public rateLimiter = new RateLimiter();
     public readonly version = "0.0.1";
 
-    protected _token: string;
+    protected innerToken: string;
 
     private readonly userAgent = `DiscordBot (https://github.com/yuki-bot/water) ${this.version}`;
 
@@ -33,15 +37,11 @@ export default class Water {
      * @memberof Water
      */
     public constructor(token: string) {
-        this._token = Water.transformToken(token);
-    }
-
-    private static transformToken(token: string): string {
-        return token.startsWith('Bot') ? token : `Bot ${token}`;
+        this.innerToken = Water.transformToken(token);
     }
 
     public get token(): string {
-        return this._token;
+        return this.innerToken;
     }
 
     public set token(token: string) {
@@ -56,23 +56,23 @@ export default class Water {
     }
 
     protected delete<T>(bucketIdentifier: string, path: string): Promise<T> {
-        return this.request('delete', bucketIdentifier, path);
+        return this.request("delete", bucketIdentifier, path);
     }
 
     protected get<T>(bucketIdentifier: string, path: string): Promise<T> {
-        return this.request('get', bucketIdentifier, path);
+        return this.request("get", bucketIdentifier, path);
     }
 
     protected patch<T>(bucketIdentifier: string, path: string, body: any): Promise<T> {
-        return this.request('patch', bucketIdentifier, path, body);
+        return this.request("patch", bucketIdentifier, path, body);
     }
 
     protected post<T>(bucketIdentifier: string, path: string, body: any): Promise<T> {
-        return this.request('post', bucketIdentifier, path, body);
+        return this.request("post", bucketIdentifier, path, body);
     }
 
     protected put<T>(bucketIdentifier: string, path: string, body: any): Promise<T> {
-        return this.request('put', bucketIdentifier, path, body);
+        return this.request("put", bucketIdentifier, path, body);
     }
 
     protected async request<T>(
@@ -84,9 +84,9 @@ export default class Water {
     ): Promise<T> {
         await this.rateLimiter.take(bucketIdentifier);
 
-        let headers: RequestHeaders = {
-            'Content-Type': 'application/json',
-            'User-Agent': this.userAgent,
+        const headers: RequestHeaders = {
+            "Content-Type": "application/json",
+            "User-Agent": this.userAgent,
         };
 
         if (auth) {
@@ -96,33 +96,33 @@ export default class Water {
         return new Promise<T>((resolve, reject) => {
             const request = https.request({
                 headers: {
-                    Authorization: this.token,
-                    'Content-Type': 'application/json',
+                    "Authorization": this.token,
+                    "Content-Type": "application/json",
                 },
                 host: Constants.API_HOST,
                 method,
                 path: `${Constants.API_BASE_PATH}/${path}`,
             });
 
-            request.once('error', e => {
+            request.once("error", (e: Error) => {
                 reject(e);
             });
 
-            request.on('response', response => {
-                let data = '';
+            request.on("response", (response: any) => {
+                let data = "";
 
-                response.on('data', (chunk: Buffer) => {
+                response.on("data", (chunk: Buffer) => {
                     data += chunk;
                 });
 
-                response.once('end', () => {
+                response.once("end", () => {
                     this.rateLimiter.process(bucketIdentifier, response);
 
                     if (response.length === 0) {
                         return resolve(undefined);
                     }
 
-                    if (response.headers['Content-Type'] !== 'application/json') {
+                    if (response.headers["Content-Type"] !== "application/json") {
                         return resolve(undefined);
                     }
 
@@ -133,7 +133,7 @@ export default class Water {
                     }
                 });
 
-                response.on('error', (e: Error) => {
+                response.on("error", (e: Error) => {
                     reject(e);
                 });
             });

@@ -14,7 +14,7 @@ export default class RateLimiter {
      *
      * For example, a bucket may have a path of `/channels/{}`.
      */
-    public buckets: Map<String, Bucket> = new Map();
+    public buckets: Map<string, Bucket> = new Map();
 
     /**
      * The global ratelimit lock.

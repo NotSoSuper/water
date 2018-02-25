@@ -1,5 +1,6 @@
 import BaseResource from "../Abstracts/BaseResource";
 import ChannelRepresentation from "../Representations/Channel";
+
 /**
  *
  *
@@ -8,6 +9,6 @@ import ChannelRepresentation from "../Representations/Channel";
  * @extends {BaseResource}
  * @implements {ChannelRepresentation}
  */
-export default class Channel extends BaseResource implements ChannelRepresentation {
+export default class Channel extends BaseResource implements Channel {
 
 }
