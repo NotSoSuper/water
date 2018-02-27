@@ -18,7 +18,8 @@ export default class User extends BaseResource {
      * @method
      * @public
      */
-    public constructor(water: Water, data: UserModel) {
+    // tslint:disable-next-line:variable-name
+    public constructor(water: Water, _data: UserModel) {
         super(water);
     }
 }

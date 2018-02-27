@@ -19,7 +19,8 @@ export default class Channel extends BaseResource {
      * @method
      * @public
      */
-    public constructor(client: Water, data: ChannelModel) {
+    // tslint:disable-next-line:variable-name
+    public constructor(client: Water, _data: ChannelModel) {
         super(client);
     }
 }

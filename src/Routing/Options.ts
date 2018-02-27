@@ -1,0 +1,116 @@
+import * as Channel from "discord-models/channel";
+import * as Guild from "discord-models/guild";
+import Snowflake from "../Abstracts/Snowflake";
+
+export interface ChannelOptions {
+    bitrate: number;
+    name: string;
+    nsfw: boolean;
+    parent_id: Snowflake;
+    permission_overwrites: Channel.PermissionOverwrite[];
+    type: Channel.ChannelType;
+    user_limit: number;
+}
+
+export interface EmojiOptions {
+    name: string;
+    image: string;
+    roles?: Snowflake[];
+}
+
+export interface GuildEmbedOptions {
+    channel_id?: Snowflake;
+    enabled?: boolean;
+}
+
+export interface GuildIntegrationOptions {
+    id: Snowflake;
+    type: string;
+}
+
+export interface GuildOptions {
+    channel?: ChannelOptions[];
+    default_message_notifications?: Guild.DefaultMessageNotificationLevel;
+    explicit_content_filter?: Guild.ExplicitContentFilterLevel;
+    icon?: string;
+    name: string;
+    region?: string;
+    roles?: Guild.Role[];
+    verification_level?: Guild.VerificationLevel;
+}
+
+export interface InviteOptions {
+    max_age?: number;
+    max_uses?: number;
+    temporary?: boolean;
+    unique?: boolean;
+}
+
+export interface MemberOptions {
+    channel_id?: Snowflake;
+    deaf?: boolean;
+    mute?: boolean;
+    nick?: string;
+    roles?: Snowflake[];
+}
+
+export interface MessageCreateOptions {
+    content?: string;
+    embed?: Channel.Embed;
+    file?: Buffer;
+    nonce?: Snowflake;
+    tts?: boolean;
+}
+
+export interface MessageRetrievalOptions {
+    after?: Snowflake;
+    around?: Snowflake;
+    before?: Snowflake;
+    limit?: number;
+}
+
+export interface NicknameOptions {
+    new_nickname: string | null;
+}
+
+export interface PermissionOverwriteOptions {
+    allow: number;
+    deny: number;
+    type: Channel.PermissionOverwriteType;
+}
+
+export interface PrivateChannelOptions {
+    recipient_id: Snowflake;
+}
+
+export interface ProfileOptions {
+    avatar?: string | null;
+    username?: string;
+}
+
+export interface RoleOptions {
+    color?: number;
+    hoist?: boolean;
+    mentionable?: boolean;
+    name?: string;
+    permissions?: number;
+}
+
+export interface RolePositionOptions {
+    id: Snowflake;
+    position: number;
+}
+
+export interface WebhookExecutionOptions {
+    avatar_url?: string;
+    content?: string;
+    embeds?: Channel.Embed[];
+    file?: Buffer;
+    tts?: boolean;
+    username?: string;
+}
+
+export interface WebhookOptions {
+    avatar?: string;
+    name?: string;
+}

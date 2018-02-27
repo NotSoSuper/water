@@ -18,7 +18,8 @@ export default class Guild extends BaseResource {
      * @method
      * @public
      */
-    public constructor(client: Water, data: GuildModel) {
+    // tslint:disable-next-line:variable-name
+    public constructor(client: Water, _data: GuildModel) {
         super(client);
     }
 }
