@@ -24,3 +24,21 @@ export const API_BASE_PATH = `/v${API_VERSION}`;
  * @type {string}
  */
 export const API_HOST = "discordapp.com";
+
+/**
+ * The host of the CDN.
+ *
+ * @constant
+ * @export
+ * @type {string}
+ */
+export const CDN_HOST = "cdn.discordapp.com";
+
+/**
+ * The base URI of the CDN.
+ *
+ * @constant
+ * @export
+ * @type {string}
+ */
+export const CDN_BASE = `https://${CDN_HOST}`;
