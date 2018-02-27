@@ -1,4 +1,4 @@
-import { Guild as GuildModel } from "discord-models/build/guild";
+import { Guild as GuildModel } from "discord-models/guild";
 import Water from "..";
 import BaseResource from "../Abstracts/BaseResource";
 

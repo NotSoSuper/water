@@ -1,4 +1,4 @@
-import * as Channel from "discord-models/build/channel";
+import * as Channel from "discord-models/channel";
 import * as https from "https";
 import Snowflake from "./Abstracts/Snowflake";
 import * as Constants from "./Constants";

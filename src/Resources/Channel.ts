@@ -1,4 +1,4 @@
-import { Channel as ChannelModel } from "discord-models/build/channel";
+import { Channel as ChannelModel } from "discord-models/channel";
 import Water from "..";
 import BaseResource from "../Abstracts/BaseResource";
 
