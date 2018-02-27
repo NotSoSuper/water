@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
 import { Bucket } from "branches";
+import * as http from "http";
 
 /**
  * Container for path-specific buckets and retrieving tickets from them.
@@ -74,7 +74,7 @@ export default class RateLimiter {
      * @method
      * @public
      */
-    public process(bucketIdentifier: string, response: AxiosResponse): number | null {
+    public process(bucketIdentifier: string, response: http.ClientResponse): number | null {
         const bucket = this.get(bucketIdentifier);
 
         const limit = response.headers["X-RateLimit-Limit"];
@@ -93,11 +93,23 @@ export default class RateLimiter {
             bucket.reset = reset;
         }
 
-        if (response.status !== 429) {
+        if (response.statusCode !== 429) {
             return null;
         }
 
-        const retryAfter = response.headers["Retry-After"];
+        let retryAfter = null;
+
+        const retryHeader = response.headers["Retry-After"];
+
+        if (retryHeader) {
+            const value = typeof retryHeader === "string" ? retryHeader : retryHeader[0];
+
+            const parsed = parseInt(value, 10);
+
+            if (!isNaN(parsed)) {
+                retryAfter = parsed;
+            }
+        }
 
         if (!retryAfter) {
             return null;

@@ -5,6 +5,7 @@ import * as Gateway from "discord-models/gateway";
 import * as Guild from "discord-models/guild";
 import * as User from "discord-models/user";
 import * as Voice from "discord-models/voice";
+import * as http from "http";
 import * as https from "https";
 import * as Constants from "./Constants";
 import RateLimiter from "./RateLimiter";
@@ -821,7 +822,7 @@ export default class Water {
                 reject(e);
             });
 
-            request.on("response", (response: any) => {
+            request.on("response", (response: http.ClientResponse) => {
                 let data = "";
 
                 response.on("data", (chunk: Buffer) => {
@@ -831,7 +832,7 @@ export default class Water {
                 response.once("end", () => {
                     this.rateLimiter.process(bucketIdentifier, response);
 
-                    if (response.length === 0) {
+                    if (data.length === 0) {
                         return resolve(undefined);
                     }
 
