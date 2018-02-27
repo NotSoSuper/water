@@ -88,7 +88,7 @@ export default class Water {
      * @property
      * @type {string}
      */
-    private readonly userAgent = `DiscordBot (https://github.com/yuki-bot/water) ${this.version}`;
+    private readonly userAgent = `DiscordBot (https://github.com/yuki-bot/water, ${this.version})`;
 
     /**
      * Creates an instance of Water.
