@@ -8,7 +8,6 @@ import BaseResource from "../Abstracts/BaseResource";
  * @export
  * @extends {BaseResource}
  * @name Guild
- * @public
  */
 export default class Guild extends BaseResource {
     /**

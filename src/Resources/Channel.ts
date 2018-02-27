@@ -8,7 +8,6 @@ import BaseResource from "../Abstracts/BaseResource";
  * @export
  * @extends {BaseResource}
  * @name Channel
- * @public
  */
 export default class Channel extends BaseResource {
     /**

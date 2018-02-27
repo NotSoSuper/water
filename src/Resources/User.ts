@@ -8,7 +8,6 @@ import BaseResource from "../Abstracts/BaseResource";
  * @export
  * @extends {BaseResource}
  * @name User
- * @public
  */
 export default class User extends BaseResource {
     /**

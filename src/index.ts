@@ -15,6 +15,10 @@ import * as utils from "./utils";
 
 type Method = "delete" | "get" | "patch" | "post" | "put";
 
+/**
+ * @interface
+ * @name RequestHeaders
+ */
 interface RequestHeaders {
     Authorization?: string | undefined;
     "Content-Type": string;
@@ -29,15 +33,60 @@ interface RequestHeaders {
  * @public
  */
 export default class Water {
+    /**
+     * Transforms a token for use, prepending `Bot ` if it's not already.
+     *
+     * @param {string} token The new token to use.
+     * @returns {string} The transformed token.
+     * @memberof Water
+     * @private
+     * @static
+     */
     private static transformToken(token: string): string {
         return token.startsWith("Bot") ? token : `Bot ${token}`;
     }
 
+    /**
+     * Ratelimiter instance for this client, used to ensure that 429 requests
+     * aren't performed.
+     *
+     * @memberof Water
+     * @public
+     * @property
+     * @type {RateLimiter}
+     */
     public rateLimiter = new RateLimiter();
+
+    /**
+     * The version of the library. Used in the user-agent.
+     *
+     * @memberof Water
+     * @public
+     * @property
+     * @readonly
+     * @type {string}
+     */
     public readonly version = "0.0.1";
 
+    /**
+     * The configured token. Used for Authorization, when authorization is
+     * enabled for a request.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @type {string}
+     */
     protected innerToken: string;
 
+    /**
+     * The User Agent to be used in all requests to the API.
+     *
+     * @memberof Water
+     * @private
+     * @property
+     * @type {string}
+     */
     private readonly userAgent = `DiscordBot (https://github.com/yuki-bot/water) ${this.version}`;
 
     /**
@@ -52,14 +101,41 @@ export default class Water {
         this.innerToken = Water.transformToken(token);
     }
 
+    /**
+     * Retrieves the currently-configured token.
+     *
+     * @returns {string}
+     * @memberof Water
+     * @method
+     * @public
+     */
     public get token(): string {
         return this.innerToken;
     }
 
+    /**
+     * Sets the token to use for the client.
+     *
+     * Prepends `Bot ` if not already prepended.
+     *
+     * @memberof Water
+     * @method
+     * @public
+     */
     public set token(token: string) {
         this.token = Water.transformToken(token);
     }
 
+    /**
+     * Adds a user to a group.
+     *
+     * @param groupId The ID of the group.
+     * @param userId The ID of the user.
+     * @returns {Promise.<null>}
+     * @memberof Water
+     * @method
+     * @public
+     */
     public addGroupRecipient(groupId: Snowflake, userId: Snowflake): Promise<null> {
         return this.get(Routes.channelsIdRecipientsId(groupId, userId));
     }
@@ -626,26 +702,92 @@ export default class Water {
         return this.delete(Routes.channelsIdPinsMessageId(channelId, messageId));
     }
 
+    /**
+     * Performs a DELETE request.
+     *
+     * @param {RouteInfo} route The request route information.
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @protected
+     */
     protected delete<T>(route: RouteInfo): Promise<T> {
         return this.request("delete", route.bucket, route.path);
     }
 
+    /**
+     * Performs a GET request.
+     *
+     * @param {RouteInfo} route The request route information.
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @protected
+     */
     protected get<T>(route: RouteInfo): Promise<T> {
         return this.request("get", route.bucket, route.path);
     }
 
+    /**
+     * Performs a PATCH request.
+     *
+     * @param {RouteInfo} route The request route information.
+     * @param {any} [body=null] The request body, if any.
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @protected
+     */
     protected patch<T>(route: RouteInfo, body: any = null): Promise<T> {
         return this.request("patch", route.bucket, route.path, body);
     }
 
+    /**
+     * Performs a POST request.
+     *
+     * @param {RouteInfo} route The request route information.
+     * @param {any} [body=null] The request body, if any.
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @protected
+     */
     protected post<T>(route: RouteInfo, body: any = null): Promise<T> {
         return this.request("post", route.bucket, route.path, body);
     }
 
+    /**
+     * Performs a PUT request.
+     *
+     * @param {RouteInfo} route The request route information.
+     * @param {any} [body=null] The request body, if any.
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @protected
+     */
     protected put<T>(route: RouteInfo, body: any = null): Promise<T> {
         return this.request("put", route.bucket, route.path, body);
     }
 
+    /**
+     * Performs a request to the Discord REST API.
+     *
+     * @param {Method} method The request verb to use, e.g. `get`.
+     * @param {string} bucketIdentifier The ID of the ratelimiting bucket to
+     * use.
+     * @param {string} path The URL path to make a request to.
+     * @param {any} [body=null] The request body. Only applicable to
+     * PATCH/POST/PUT requests.
+     * @param {boolean} [auth=true] Whether to use the internally configured bot
+     * token.
+     * @returns {Promise.<T>} A promise that will resolve to the defined type
+     * after JSON parsing, if a response body exists.
+     * @async
+     * @memberof Water
+     * @method
+     * @protected
+     */
     protected async request<T>(
         method: Method,
         bucketIdentifier: string,

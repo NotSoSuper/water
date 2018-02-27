@@ -7,12 +7,18 @@ import { Bucket } from "branches";
  * Manages ratelimits, queueing requests, and a global ratelimit lock.
  *
  * @class
+ * @export
+ * @name RateLimiter
  */
 export default class RateLimiter {
     /**
      * Map containing the buckets, keyed by their path.
      *
      * For example, a bucket may have a path of `/channels/{}`.
+     *
+     * @prop
+     * @public
+     * @type {Map<string, Bucket>}
      */
     public buckets: Map<string, Bucket> = new Map();
 
@@ -24,15 +30,24 @@ export default class RateLimiter {
      *
      * If this is null, then the global ratelimit has not yet (knowingly) been
      * reached.
+     *
+     * @prop
+     * @public
+     * @type {number | null}
      */
     public global: number | null = null;
 
     /**
+     * Retrieves a bucket by identifier.
      *
-     * @param bucketIdentifier
-     * @returns
-     * @public
+     * This should be in the form of `/channels/1234567890/messages/{}`.
+     *
+     * Creates a new bucket if one does not exist for the identifier.
+     *
+     * @param bucketIdentifier The ID of the bucket.
+     * @returns {Bucket} The ratelimit bucket.
      * @method
+     * @public
      */
     public get(bucketIdentifier: string): Bucket {
         if (!this.buckets.has(bucketIdentifier)) {
@@ -56,8 +71,8 @@ export default class RateLimiter {
      * @returns Returns the number of milliseconds to wait before re-requesting.
      * This is only valid if a 429 was approached. Otherwise, returns null,
      * indicating the response is successful.
-     * @public
      * @method
+     * @public
      */
     public process(bucketIdentifier: string, response: AxiosResponse): number | null {
         const bucket = this.get(bucketIdentifier);
@@ -98,9 +113,9 @@ export default class RateLimiter {
     /**
      * Takes a ticket from the given bucket identifier.
      *
-     * @param bucketIdentifier
-     * @public
+     * @param {string} bucketIdentifier The ID of the bucket.
      * @method
+     * @public
      */
     public async take(bucketIdentifier: string) {
         if (this.global) {

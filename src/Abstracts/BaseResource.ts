@@ -5,7 +5,6 @@ import Water from "../";
  * @default
  * @export
  * @name BaseResource
- * @public
  */
 export default class BaseResource {
     /**
