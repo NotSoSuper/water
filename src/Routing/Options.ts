@@ -1,6 +1,6 @@
 import * as Channel from "discord-models/channel";
+import { Snowflake } from "discord-models/discord-models";
 import * as Guild from "discord-models/guild";
-import Snowflake from "../Abstracts/Snowflake";
 
 export interface ChannelOptions {
     bitrate: number;

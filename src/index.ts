@@ -1,11 +1,11 @@
 import * as Application from "discord-models/application";
 import * as Channel from "discord-models/channel";
+import { Snowflake } from "discord-models/discord-models";
 import * as Gateway from "discord-models/gateway";
 import * as Guild from "discord-models/guild";
 import * as User from "discord-models/user";
 import * as Voice from "discord-models/voice";
 import * as https from "https";
-import Snowflake from "./Abstracts/Snowflake";
 import * as Constants from "./Constants";
 import RateLimiter from "./RateLimiter";
 import * as Options from "./Routing/Options";

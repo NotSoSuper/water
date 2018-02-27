@@ -1,4 +1,4 @@
-import Snowflake from "../Abstracts/Snowflake";
+import { Snowflake } from "discord-models/discord-models";
 
 /**
  * @param {string} res The path to use for both the `bucket` and `path` of a
