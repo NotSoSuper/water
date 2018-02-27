@@ -1,13 +1,25 @@
 import { CustomReaction, Reaction, ReactionType, UnicodeReaction } from "discord-models/channel";
 
-export function parseReactionType(reactionType: Reaction): string {
-    if (reactionType.type === ReactionType.Custom) {
-        reactionType = reactionType as CustomReaction;
+/**
+ * Parses a reaction into data that can be passed as a URL query parameter.
+ *
+ * @param {Reaction} reactionType The reaction to parse for use in URLs.
+ * @returns {string} The parsed URI encoded reaction data.
+ * @export
+ * @function
+ */
+export function parseReaction(reaction: Reaction): string {
+    let data;
 
-        return `${reactionType.id}:${reactionType.name}`;
+    if (reaction.type === ReactionType.Custom) {
+        reaction = reaction as CustomReaction;
+
+        data = `${reaction.id}:${reaction.name}`;
     } else {
-        reactionType = reactionType as UnicodeReaction;
+        reaction = reaction as UnicodeReaction;
 
-        return `${reactionType.value}`;
+        data = `${reaction.value}`;
     }
+
+    return encodeURIComponent(data);
 }

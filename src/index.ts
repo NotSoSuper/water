@@ -146,7 +146,7 @@ export default class Water {
         return this.get(Routes.channelsIdMessagesIdReactionsTargetUserId(
             channelId,
             messageId,
-            utils.parseReactionType(reaction),
+            utils.parseReaction(reaction),
             "@me",
         ));
     }
@@ -221,7 +221,7 @@ export default class Water {
         return this.delete(Routes.channelsIdMessagesIdReactionsTargetUserId(
             channelId,
             messageId,
-            utils.parseReactionType(reaction),
+            utils.parseReaction(reaction),
             configuredUserId,
         ));
     }
@@ -539,7 +539,7 @@ export default class Water {
         const info = Routes.channelsIdMessagesIdReactionsTarget(
             channelId,
             messageId,
-            utils.parseReactionType(reaction),
+            utils.parseReaction(reaction),
         );
 
         info.path += "?";
