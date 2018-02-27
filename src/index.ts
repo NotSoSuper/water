@@ -235,7 +235,9 @@ export default class Water {
     }
 
     public deleteWebhookWithToken(webhookId: Snowflake, token: string): Promise<null> {
-        return this.delete(Routes.webhooksIdToken(webhookId, token));
+        const info = Routes.webhooksIdToken(webhookId, token);
+
+        return this.request("delete", info.bucket, info.path, null, false);
     }
 
     public editChannel(channelId: Snowflake, options: Options.ChannelOptions): Promise<Guild.GuildChannel> {
@@ -334,7 +336,9 @@ export default class Water {
         token: string,
         options: Options.WebhookOptions,
     ): Promise<Channel.Webhook> {
-        return this.patch(Routes.webhooksIdToken(webhookId, token), options);
+        const info = Routes.webhooksIdToken(webhookId, token);
+
+        return this.request("delete", info.bucket, info.path, options, false);
     }
 
     public executeWebhook(
@@ -349,7 +353,7 @@ export default class Water {
             info.path += `?wait=${wait}`;
         }
 
-        return this.patch(info, options);
+        return this.request("patch", info.bucket, info.path, options, false);
     }
 
     public getAuditLogs(
