@@ -198,6 +198,13 @@ export default class Water {
         return this.post(Routes.channelsIdInvites(channelId), options);
     }
 
+    public createMessage(
+        channelId: Snowflake,
+        options: Options.MessageCreateOptions,
+    ): Promise<Channel.Message> {
+        return this.post(Routes.channelsIdMessages(channelId), options);
+    }
+
     public createPermission(
         channelId: Snowflake,
         targetId: Snowflake,
