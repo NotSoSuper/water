@@ -1,6 +1,6 @@
+import { Snowflake } from "discord-models";
 import * as Application from "discord-models/application";
 import * as Channel from "discord-models/channel";
-import { Snowflake } from "discord-models/discord-models";
 import * as Gateway from "discord-models/gateway";
 import * as Guild from "discord-models/guild";
 import * as User from "discord-models/user";
