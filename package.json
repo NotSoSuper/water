@@ -18,7 +18,7 @@
   "homepage": "https://github.com/yuki-bot/water#readme",
   "dependencies": {
     "branches": "github:yuki-bot/branches",
-    "discord-models": "https://github.com/yuki-bot/discord-models.ts"
+    "discord-models": "../discord-models.ts"
   },
   "devDependencies": {
     "@types/node": "^9.4.6",

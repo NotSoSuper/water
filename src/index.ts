@@ -14,7 +14,7 @@ import * as Routes from "./Routing/Routes";
 import { RouteInfo } from "./Routing/Routes";
 import * as utils from "./utils";
 
-type Method = "delete" | "get" | "patch" | "post" | "put";
+export type Method = "delete" | "get" | "patch" | "post" | "put";
 
 /**
  * @interface

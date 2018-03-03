@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "declaration": true,
+    "declarationDir": "./",
+    "experimentalDecorators": true,
+    "lib": ["es5", "es2017"],
     "module": "commonjs",
-    "lib": ["es5", "dom", "es2017"],
-    "strict": true,
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "experimentalDecorators": true,
-    "outDir": "dist/",
-    "rootDir": "src/",
-  }
+    "outDir": "build",
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "ES2017",
+  },
+  "include": ["src"]
 }
