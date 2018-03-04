@@ -275,9 +275,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected delete<T>(route: RouteInfo): Promise<T>;
+    delete<T>(route: RouteInfo): Promise<T>;
     /**
      * Performs a GET request.
      *
@@ -285,9 +285,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected get<T>(route: RouteInfo): Promise<T>;
+    get<T>(route: RouteInfo): Promise<T>;
     /**
      * Performs a PATCH request.
      *
@@ -296,9 +296,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected patch<T>(route: RouteInfo, body?: any): Promise<T>;
+    patch<T>(route: RouteInfo, body?: any): Promise<T>;
     /**
      * Performs a POST request.
      *
@@ -307,9 +307,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected post<T>(route: RouteInfo, body?: any): Promise<T>;
+    post<T>(route: RouteInfo, body?: any): Promise<T>;
     /**
      * Performs a PUT request.
      *
@@ -318,9 +318,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected put<T>(route: RouteInfo, body?: any): Promise<T>;
+    put<T>(route: RouteInfo, body?: any): Promise<T>;
     /**
      * Performs a request to the Discord REST API.
      *
@@ -337,7 +337,7 @@ export default class Water {
      * @async
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected request<T>(method: Method, bucketIdentifier: string, path: string, body?: any, auth?: boolean): Promise<T>;
+    request<T>(method: Method, bucketIdentifier: string, path: string, body?: any, auth?: boolean): Promise<T>;
 }

@@ -811,9 +811,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected delete<T>(route: RouteInfo): Promise<T> {
+    public delete<T>(route: RouteInfo): Promise<T> {
         return this.request("delete", route.bucket, route.path);
     }
 
@@ -824,9 +824,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected get<T>(route: RouteInfo): Promise<T> {
+    public get<T>(route: RouteInfo): Promise<T> {
         return this.request("get", route.bucket, route.path);
     }
 
@@ -838,9 +838,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected patch<T>(route: RouteInfo, body: any = null): Promise<T> {
+    public patch<T>(route: RouteInfo, body: any = null): Promise<T> {
         return this.request("patch", route.bucket, route.path, body);
     }
 
@@ -852,9 +852,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected post<T>(route: RouteInfo, body: any = null): Promise<T> {
+    public post<T>(route: RouteInfo, body: any = null): Promise<T> {
         return this.request("post", route.bucket, route.path, body);
     }
 
@@ -866,9 +866,9 @@ export default class Water {
      * @returns {Promise.<T>}
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected put<T>(route: RouteInfo, body: any = null): Promise<T> {
+    public put<T>(route: RouteInfo, body: any = null): Promise<T> {
         return this.request("put", route.bucket, route.path, body);
     }
 
@@ -888,9 +888,9 @@ export default class Water {
      * @async
      * @memberof Water
      * @method
-     * @protected
+     * @public
      */
-    protected async request<T>(
+    public async request<T>(
         method: Method,
         bucketIdentifier: string,
         path: string,
