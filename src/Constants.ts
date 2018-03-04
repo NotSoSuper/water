@@ -26,6 +26,24 @@ export const API_BASE_PATH = `/v${API_VERSION}`;
 export const API_HOST = "discordapp.com";
 
 /**
+ * The protocol of the API.
+ *
+ * @constant
+ * @export
+ * @type {string}
+ */
+export const API_PROTOCOL = "https";
+
+/**
+ * The base URI of the API.
+ *
+ * @constant
+ * @export
+ * @type {string}
+ */
+export const API_BASE = `https://${API_HOST}/api${API_BASE_PATH}`;
+
+/**
  * The host of the CDN.
  *
  * @constant

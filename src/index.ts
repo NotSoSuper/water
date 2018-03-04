@@ -27,6 +27,55 @@ interface RequestHeaders {
 }
 
 /**
+ * @export
+ * @interface
+ * @name WaterOptions
+ */
+export interface WaterOptions {
+    /**
+     * Optional details when using a request proxy.
+     *
+     * @type {object?}
+     */
+    proxy?: {
+        /**
+         * The host to use.
+         *
+         * For example, this could be `0.0.0.0:15000`.
+         *
+         * @type {string}
+         */
+        host: string;
+        /**
+         * The path to use.
+         *
+         * For example, this could be "/api" or an empty string.
+         *
+         * @type {string}
+         */
+        path: string;
+
+        /**
+         * The protocol to use.
+         *
+         * This should probably be `http` or `https`.
+         *
+         * @type {string}
+         */
+        protocol: string;
+    };
+
+    /**
+     * The bot token to use.
+     *
+     * `Bot ` will automatically be prefixed.
+     *
+     * @type {string}
+     */
+    token: string;
+}
+
+/**
  * @class
  * @default
  * @export
@@ -81,6 +130,45 @@ export default class Water {
     protected innerToken: string;
 
     /**
+     * The host to use when making requests.
+     *
+     * For example, this could be `0.0.0.0:15000`.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @readonly
+     * @type {string}
+     */
+    protected readonly requestHost: string = Constants.API_HOST;
+
+    /**
+     * The configured path to use when making requests.
+     *
+     * For example, this could be `/api/v6`.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @readonly
+     * @type {string}
+     */
+    protected readonly requestPath: string = Constants.API_BASE_PATH;
+
+    /**
+     * The protocol to use when making requests.
+     *
+     * For example, this could be `https`.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @readonly
+     * @type {string}
+     */
+    protected readonly requestProtocol: string = Constants.API_PROTOCOL;
+
+    /**
      * The User Agent to be used in all requests to the API.
      *
      * @memberof Water
@@ -92,14 +180,20 @@ export default class Water {
 
     /**
      * Creates an instance of Water.
-     * @param {string} token
+     * @param {WaterOptions} options
      * @constructor
      * @memberof Water
      * @method
      * @public
      */
-    public constructor(token: string) {
-        this.innerToken = Water.transformToken(token);
+    public constructor(options: WaterOptions) {
+        this.innerToken = Water.transformToken(options.token);
+
+        if (options.proxy) {
+            this.requestHost = options.proxy.host;
+            this.requestPath = options.proxy.path;
+            this.requestProtocol = options.proxy.protocol;
+        }
     }
 
     /**
@@ -820,9 +914,10 @@ export default class Water {
                     "Authorization": this.token,
                     "Content-Type": "application/json",
                 },
-                host: Constants.API_HOST,
+                host: this.requestHost,
                 method,
-                path: `${Constants.API_BASE_PATH}/${path}`,
+                path: `${this.requestPath}/${path}`,
+                protocol: this.requestProtocol,
             });
 
             request.once("error", (e: Error) => {

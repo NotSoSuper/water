@@ -10,6 +10,52 @@ import * as Options from "./Routing/Options";
 import { RouteInfo } from "./Routing/Routes";
 export declare type Method = "delete" | "get" | "patch" | "post" | "put";
 /**
+ * @export
+ * @interface
+ * @name WaterOptions
+ */
+export interface WaterOptions {
+    /**
+     * Optional details when using a request proxy.
+     *
+     * @type {object?}
+     */
+    proxy?: {
+        /**
+         * The host to use.
+         *
+         * For example, this could be `0.0.0.0:15000`.
+         *
+         * @type {string}
+         */
+        host: string;
+        /**
+         * The path to use.
+         *
+         * For example, this could be "/api" or an empty string.
+         *
+         * @type {string}
+         */
+        path: string;
+        /**
+         * The protocol to use.
+         *
+         * This should probably be `http` or `https`.
+         *
+         * @type {string}
+         */
+        protocol: string;
+    };
+    /**
+     * The bot token to use.
+     *
+     * `Bot ` will automatically be prefixed.
+     *
+     * @type {string}
+     */
+    token: string;
+}
+/**
  * @class
  * @default
  * @export
@@ -58,6 +104,42 @@ export default class Water {
      */
     protected innerToken: string;
     /**
+     * The host to use when making requests.
+     *
+     * For example, this could be `0.0.0.0:15000`.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @readonly
+     * @type {string}
+     */
+    protected readonly requestHost: string;
+    /**
+     * The configured path to use when making requests.
+     *
+     * For example, this could be `/api/v6`.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @readonly
+     * @type {string}
+     */
+    protected readonly requestPath: string;
+    /**
+     * The protocol to use when making requests.
+     *
+     * For example, this could be `https`.
+     *
+     * @memberof Water
+     * @property
+     * @protected
+     * @readonly
+     * @type {string}
+     */
+    protected readonly requestProtocol: string;
+    /**
      * The User Agent to be used in all requests to the API.
      *
      * @memberof Water
@@ -68,13 +150,13 @@ export default class Water {
     private readonly userAgent;
     /**
      * Creates an instance of Water.
-     * @param {string} token
+     * @param {WaterOptions} options
      * @constructor
      * @memberof Water
      * @method
      * @public
      */
-    constructor(token: string);
+    constructor(options: WaterOptions);
     /**
      * Retrieves the currently-configured token.
      *
