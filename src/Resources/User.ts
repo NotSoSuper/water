@@ -34,7 +34,7 @@ export default class User extends BaseResource {
         this.bot = data.bot || false;
         this.discriminator = data.discriminator;
         this.id = data.id;
-        this.name = data.name;
+        this.name = data.username;
     }
 
     /**
