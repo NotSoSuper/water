@@ -2,7 +2,7 @@
   "name": "water",
   "version": "0.0.1",
   "description": "Discord REST Library",
-  "main": "index.js",
+  "main": "dist/build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/yuki-bot/water#readme",
   "dependencies": {
     "branches": "github:yuki-bot/branches",
-    "discord-models": "github:yuki-bot/discord-models.ts"
+    "discord-models": "yuki-bot/discord-models.ts"
   },
   "devDependencies": {
     "@types/node": "^9.4.6",

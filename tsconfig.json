@@ -2,17 +2,22 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "./",
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "module": "es6",
     "lib": ["es5", "es2017"],
-    "module": "commonjs",
     "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "build",
+    "outDir": "dist/build",
     "strict": true,
     "strictNullChecks": true,
-    "target": "ES2017",
+    "stripInternal": true,
+    "sourceMap": true,
+    "target": "ES2017"
   },
   "include": ["src"]
 }
