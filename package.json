@@ -2,7 +2,7 @@
   "name": "water",
   "version": "0.0.1",
   "description": "Discord REST Library",
-  "main": "dist/build/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

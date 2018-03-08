@@ -12,12 +12,13 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist/build",
+    "outDir": "./",
     "strict": true,
     "strictNullChecks": true,
     "stripInternal": true,
     "sourceMap": true,
     "target": "ES2017"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": []
 }
