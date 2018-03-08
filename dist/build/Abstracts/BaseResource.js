@@ -1,10 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @class
  * @default
  * @export
  * @name BaseResource
  */
-export default class BaseResource {
+class BaseResource {
     /**
      * @param client
      * @constructor
@@ -15,4 +17,5 @@ export default class BaseResource {
         this.client = client;
     }
 }
+exports.default = BaseResource;
 //# sourceMappingURL=BaseResource.js.map

@@ -1,5 +1,7 @@
-import BaseResource from "../Abstracts/BaseResource";
-import * as Constants from "../Constants";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const BaseResource_1 = require("../Abstracts/BaseResource");
+const Constants = require("../Constants");
 /**
  * @class
  * @default
@@ -7,7 +9,7 @@ import * as Constants from "../Constants";
  * @extends {BaseResource}
  * @name User
  */
-export default class User extends BaseResource {
+class User extends BaseResource_1.default {
     /**
      * @param {Water} water
      * @param {UserModel} data
@@ -103,4 +105,5 @@ export default class User extends BaseResource {
         return `${Constants.CDN_BASE}/avatars/${this.id}/${this.avatar}/${ext}`;
     }
 }
+exports.default = User;
 //# sourceMappingURL=User.js.map

@@ -1,8 +1,10 @@
-import * as https from "https";
-import * as Constants from "./Constants";
-import RateLimiter from "./RateLimiter";
-import * as Routes from "./Routing/Routes";
-import * as utils from "./utils";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const https = require("https");
+const Constants = require("./Constants");
+const RateLimiter_1 = require("./RateLimiter");
+const Routes = require("./Routing/Routes");
+const utils = require("./utils");
 /**
  * @class
  * @default
@@ -10,7 +12,7 @@ import * as utils from "./utils";
  * @name Water
  * @public
  */
-export default class Water {
+class Water {
     /**
      * Creates an instance of Water.
      * @param {WaterOptions} options
@@ -29,7 +31,7 @@ export default class Water {
          * @property
          * @type {RateLimiter}
          */
-        this.rateLimiter = new RateLimiter();
+        this.rateLimiter = new RateLimiter_1.default();
         /**
          * The version of the library. Used in the user-agent.
          *
@@ -605,4 +607,5 @@ export default class Water {
         });
     }
 }
+exports.default = Water;
 //# sourceMappingURL=index.js.map

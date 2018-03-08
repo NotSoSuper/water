@@ -1,4 +1,6 @@
-import BaseResource from "../Abstracts/BaseResource";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const BaseResource_1 = require("../Abstracts/BaseResource");
 /**
  * @class
  * @default
@@ -6,7 +8,7 @@ import BaseResource from "../Abstracts/BaseResource";
  * @extends {BaseResource}
  * @name Guild
  */
-export default class Guild extends BaseResource {
+class Guild extends BaseResource_1.default {
     /**
      * @param {Water} client
      * @param {GuildModel} data
@@ -19,4 +21,5 @@ export default class Guild extends BaseResource {
         super(client);
     }
 }
+exports.default = Guild;
 //# sourceMappingURL=Guild.js.map

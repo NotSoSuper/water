@@ -1,1 +1,1 @@
-{"version":3,"file":"BaseResource.js","sourceRoot":"","sources":["../../../src/Abstracts/BaseResource.ts"],"names":[],"mappings":"AAEA;;;;;GAKG;AACH,MAAM,CAAC,OAAO;IACV;;;;;OAKG;IACH,YAA6B,MAAa;QAAb,WAAM,GAAN,MAAM,CAAO;IAC1C,CAAC;CACJ"}
+{"version":3,"file":"BaseResource.js","sourceRoot":"","sources":["../../../src/Abstracts/BaseResource.ts"],"names":[],"mappings":";;AAEA;;;;;GAKG;AACH;IACI;;;;;OAKG;IACH,YAA6B,MAAa;QAAb,WAAM,GAAN,MAAM,CAAO;IAC1C,CAAC;CACJ;AATD,+BASC"}

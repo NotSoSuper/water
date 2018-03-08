@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @param {string} res The path to use for both the `bucket` and `path` of a
  * `RouteInfo`.
@@ -16,27 +18,30 @@ function single(res) {
  * @export
  * @function
  */
-export function channelsId(channelId) {
+function channelsId(channelId) {
     return single(`/channels/${channelId}`);
 }
+exports.channelsId = channelsId;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function channelsIdInvites(channelId) {
+function channelsIdInvites(channelId) {
     return single(`/channels/${channelId}/invites`);
 }
+exports.channelsIdInvites = channelsIdInvites;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function channelsIdMessages(channelId) {
+function channelsIdMessages(channelId) {
     return single(`/channels/${channelId}/messages`);
 }
+exports.channelsIdMessages = channelsIdMessages;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} messageId The ID of the message.
@@ -44,12 +49,13 @@ export function channelsIdMessages(channelId) {
  * @export
  * @function
  */
-export function channelsIdMessagesId(channelId, messageId) {
+function channelsIdMessagesId(channelId, messageId) {
     return {
         bucket: `/channels/${channelId}/messages/{}`,
         path: `/channels/${channelId}/messages/${messageId}`,
     };
 }
+exports.channelsIdMessagesId = channelsIdMessagesId;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} messageId The ID of the message.
@@ -57,12 +63,13 @@ export function channelsIdMessagesId(channelId, messageId) {
  * @export
  * @function
  */
-export function channelsIdMessagesIdReactions(channelId, messageId) {
+function channelsIdMessagesIdReactions(channelId, messageId) {
     return {
         bucket: `/channels/${channelId}/messages/{}/reactions`,
         path: `/channels/${channelId}/messages/${messageId}/reactions`,
     };
 }
+exports.channelsIdMessagesIdReactions = channelsIdMessagesIdReactions;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} messageId The ID of the message.
@@ -71,12 +78,13 @@ export function channelsIdMessagesIdReactions(channelId, messageId) {
  * @export
  * @function
  */
-export function channelsIdMessagesIdReactionsTarget(channelId, messageId, reactionData) {
+function channelsIdMessagesIdReactionsTarget(channelId, messageId, reactionData) {
     return {
         bucket: `/channels/${channelId}/messages/{}/reactions/{}`,
         path: `/channels/${channelId}/messages/${messageId}/reactions/${reactionData}`,
     };
 }
+exports.channelsIdMessagesIdReactionsTarget = channelsIdMessagesIdReactionsTarget;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} messageId The ID of the message.
@@ -86,12 +94,13 @@ export function channelsIdMessagesIdReactionsTarget(channelId, messageId, reacti
  * @export
  * @function
  */
-export function channelsIdMessagesIdReactionsTargetUserId(channelId, messageId, reactionData, userId) {
+function channelsIdMessagesIdReactionsTargetUserId(channelId, messageId, reactionData, userId) {
     return {
         bucket: `/channels/${channelId}/messages/{}/reactions/{}/{}`,
         path: `/channels/${channelId}/messages/${messageId}/reactions/${reactionData}/${userId}`,
     };
 }
+exports.channelsIdMessagesIdReactionsTargetUserId = channelsIdMessagesIdReactionsTargetUserId;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} targetId The ID of the target.
@@ -99,21 +108,23 @@ export function channelsIdMessagesIdReactionsTargetUserId(channelId, messageId, 
  * @export
  * @function
  */
-export function channelsIdPermissionsTargetId(channelId, targetId) {
+function channelsIdPermissionsTargetId(channelId, targetId) {
     return {
         bucket: `/channels/${channelId}/permissions/{}`,
         path: `/channels/${channelId}/permissions/${targetId}`,
     };
 }
+exports.channelsIdPermissionsTargetId = channelsIdPermissionsTargetId;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function channelsIdPins(channelId) {
+function channelsIdPins(channelId) {
     return single(`/channels/${channelId}/pins`);
 }
+exports.channelsIdPins = channelsIdPins;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} messageId The ID of the message.
@@ -121,12 +132,13 @@ export function channelsIdPins(channelId) {
  * @export
  * @function
  */
-export function channelsIdPinsMessageId(channelId, messageId) {
+function channelsIdPinsMessageId(channelId, messageId) {
     return {
         bucket: `/channels/${channelId}/pins/{}`,
         path: `/channels/${channelId}/pins/${messageId}`,
     };
 }
+exports.channelsIdPinsMessageId = channelsIdPinsMessageId;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @param {Snowflake} userId The ID of the user.
@@ -134,83 +146,92 @@ export function channelsIdPinsMessageId(channelId, messageId) {
  * @export
  * @function
  */
-export function channelsIdRecipientsId(groupId, userId) {
+function channelsIdRecipientsId(groupId, userId) {
     return {
         bucket: `/channels/${groupId}/recipients/{}`,
         path: `/channels/${groupId}/recipients/${userId}`,
     };
 }
+exports.channelsIdRecipientsId = channelsIdRecipientsId;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function channelsIdTyping(channelId) {
+function channelsIdTyping(channelId) {
     return single(`/channels/${channelId}/typing`);
 }
+exports.channelsIdTyping = channelsIdTyping;
 /**
  * @param {Snowflake} channelId The ID of the channel.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function channelsIdWebhooks(channelId) {
+function channelsIdWebhooks(channelId) {
     return single(`/channels/${channelId}/webhooks`);
 }
+exports.channelsIdWebhooks = channelsIdWebhooks;
 /**
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function gateway() {
+function gateway() {
     return single("/gateway");
 }
+exports.gateway = gateway;
 /**
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function gatewayBot() {
+function gatewayBot() {
     return single("/gateway/bot");
 }
+exports.gatewayBot = gatewayBot;
 /**
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guilds() {
+function guilds() {
     return {
         bucket: "/guilds",
         path: "/guilds",
     };
 }
+exports.guilds = guilds;
 /**
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsId(guildId) {
+function guildsId(guildId) {
     return single(`/guilds/${guildId}`);
 }
+exports.guildsId = guildsId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdAuditLogs(guildId) {
+function guildsIdAuditLogs(guildId) {
     return single(`/guilds/${guildId}/audit-logs`);
 }
+exports.guildsIdAuditLogs = guildsIdAuditLogs;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdBans(guildId) {
+function guildsIdBans(guildId) {
     return single(`/guilds/${guildId}/bans`);
 }
+exports.guildsIdBans = guildsIdBans;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} userId The ID of the user.
@@ -218,39 +239,43 @@ export function guildsIdBans(guildId) {
  * @export
  * @function
  */
-export function guildsIdBansUserId(guildId, userId) {
+function guildsIdBansUserId(guildId, userId) {
     return {
         bucket: `/guilds/${guildId}/bans/{}`,
         path: `/guilds/${guildId}/bans/${userId}`,
     };
 }
+exports.guildsIdBansUserId = guildsIdBansUserId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdChannels(guildId) {
+function guildsIdChannels(guildId) {
     return single(`/guilds/${guildId}/channels`);
 }
+exports.guildsIdChannels = guildsIdChannels;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdEmbed(guildId) {
+function guildsIdEmbed(guildId) {
     return single(`/guilds/${guildId}/embed`);
 }
+exports.guildsIdEmbed = guildsIdEmbed;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdEmojis(guildId) {
+function guildsIdEmojis(guildId) {
     return single(`/guilds/${guildId}/emojis`);
 }
+exports.guildsIdEmojis = guildsIdEmojis;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} emojiId The ID of the emoji.
@@ -258,21 +283,23 @@ export function guildsIdEmojis(guildId) {
  * @export
  * @function
  */
-export function guildsIdEmojisId(guildId, emojiId) {
+function guildsIdEmojisId(guildId, emojiId) {
     return {
         bucket: `/guilds/${guildId}/emojis/{}`,
         path: `/guilds/${guildId}/emojis/${emojiId}`,
     };
 }
+exports.guildsIdEmojisId = guildsIdEmojisId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdIntegrations(guildId) {
+function guildsIdIntegrations(guildId) {
     return single(`/guilds/${guildId}/integrations`);
 }
+exports.guildsIdIntegrations = guildsIdIntegrations;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} integrationId The ID of the integration.
@@ -280,12 +307,13 @@ export function guildsIdIntegrations(guildId) {
  * @export
  * @function
  */
-export function guildsIdIntegrationsId(guildId, integrationId) {
+function guildsIdIntegrationsId(guildId, integrationId) {
     return {
         bucket: `/guilds/${guildId}/integrations/{}`,
         path: `/guilds/${guildId}/integrations/${integrationId}`,
     };
 }
+exports.guildsIdIntegrationsId = guildsIdIntegrationsId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} integrationId The ID of the integration.
@@ -293,30 +321,33 @@ export function guildsIdIntegrationsId(guildId, integrationId) {
  * @export
  * @function
  */
-export function guildsIdIntegrationsIdSync(guildId, integrationId) {
+function guildsIdIntegrationsIdSync(guildId, integrationId) {
     return {
         bucket: `/guilds/${guildId}/integrations/{}/sync`,
         path: `/guilds/${guildId}/integrations/${integrationId}/sync`,
     };
 }
+exports.guildsIdIntegrationsIdSync = guildsIdIntegrationsIdSync;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdInvites(guildId) {
+function guildsIdInvites(guildId) {
     return single(`/guilds/${guildId}/invites`);
 }
+exports.guildsIdInvites = guildsIdInvites;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdMembers(guildId) {
+function guildsIdMembers(guildId) {
     return single(`/guilds/${guildId}/members`);
 }
+exports.guildsIdMembers = guildsIdMembers;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {string} targetId The ID of the target.
@@ -324,12 +355,13 @@ export function guildsIdMembers(guildId) {
  * @export
  * @function
  */
-export function guildsIdMembersTargetIdNick(guildId, targetId) {
+function guildsIdMembersTargetIdNick(guildId, targetId) {
     return {
         bucket: `/guilds/${guildId}/members/{}/nick`,
         path: `/guilds/${guildId}/members/${targetId}/nick`,
     };
 }
+exports.guildsIdMembersTargetIdNick = guildsIdMembersTargetIdNick;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} userId The ID of the user.
@@ -337,12 +369,13 @@ export function guildsIdMembersTargetIdNick(guildId, targetId) {
  * @export
  * @function
  */
-export function guildsIdMembersUserId(guildId, userId) {
+function guildsIdMembersUserId(guildId, userId) {
     return {
         bucket: `/guilds/${guildId}/members/{}`,
         path: `/guilds/${guildId}/members/${userId}`,
     };
 }
+exports.guildsIdMembersUserId = guildsIdMembersUserId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} userId The ID of the user.
@@ -351,39 +384,43 @@ export function guildsIdMembersUserId(guildId, userId) {
  * @export
  * @function
  */
-export function guildsIdMembersUserIdRolesId(guildId, userId, roleId) {
+function guildsIdMembersUserIdRolesId(guildId, userId, roleId) {
     return {
         bucket: `/guilds/${guildId}/members/{}/roles/{}`,
         path: `/guilds/${guildId}/members/${userId}/roles/${roleId}`,
     };
 }
+exports.guildsIdMembersUserIdRolesId = guildsIdMembersUserIdRolesId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdPrune(guildId) {
+function guildsIdPrune(guildId) {
     return single(`/guilds/${guildId}/prune`);
 }
+exports.guildsIdPrune = guildsIdPrune;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdRegions(guildId) {
+function guildsIdRegions(guildId) {
     return single(`/guilds/${guildId}/regions`);
 }
+exports.guildsIdRegions = guildsIdRegions;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdRoles(guildId) {
+function guildsIdRoles(guildId) {
     return single(`/guilds/${guildId}/roles`);
 }
+exports.guildsIdRoles = guildsIdRoles;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} roleId The ID of the role.
@@ -391,12 +428,13 @@ export function guildsIdRoles(guildId) {
  * @export
  * @function
  */
-export function guildsIdRolesId(guildId, roleId) {
+function guildsIdRolesId(guildId, roleId) {
     return {
         bucket: `/guilds/${guildId}/roles/{}`,
         path: `/guilds/${guildId}/roles/${roleId}`,
     };
 }
+exports.guildsIdRolesId = guildsIdRolesId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @param {Snowflake} userId The ID of the user.
@@ -405,60 +443,66 @@ export function guildsIdRolesId(guildId, roleId) {
  * @export
  * @function
  */
-export function guildsIdUsersIdRolesId(guildId, userId, roleId) {
+function guildsIdUsersIdRolesId(guildId, userId, roleId) {
     return {
         bucket: `/guilds/${guildId}/members/{}/roles/{}`,
         path: `/guilds/${guildId}/members/${userId}/roles/${roleId}`,
     };
 }
+exports.guildsIdUsersIdRolesId = guildsIdUsersIdRolesId;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdVanityUrl(guildId) {
+function guildsIdVanityUrl(guildId) {
     return single(`/guilds/${guildId}/vanity-url`);
 }
+exports.guildsIdVanityUrl = guildsIdVanityUrl;
 /**
  * @param {Snowflake} guildId The ID of the guild.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function guildsIdWebhooks(guildId) {
+function guildsIdWebhooks(guildId) {
     return single(`/guilds/${guildId}/webhooks`);
 }
+exports.guildsIdWebhooks = guildsIdWebhooks;
 /**
  * @param {string} code The invite code.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function invitesCode(code) {
+function invitesCode(code) {
     return single(`/invites/${code}`);
 }
+exports.invitesCode = invitesCode;
 /**
  * @param {Snowflake | string} targetId The ID of the target.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function oauth2ApplicationsTargetId(targetId) {
+function oauth2ApplicationsTargetId(targetId) {
     return {
         bucket: "/oauth2/applications/{}",
         path: `/oauth2/applications/${targetId}`,
     };
 }
+exports.oauth2ApplicationsTargetId = oauth2ApplicationsTargetId;
 /**
  * @param {Snowflake | string} userId The ID of the user.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function usersId(userId) {
+function usersId(userId) {
     return single(`/users/${userId}`);
 }
+exports.usersId = usersId;
 /**
  * @param {Snowflake | string} userId The ID of the user.
  * @returns {RouteInfo}
@@ -466,18 +510,20 @@ export function usersId(userId) {
  * @function
  */
 // Accepts a string for the special case of '@me'.
-export function usersIdChannels(userId) {
+function usersIdChannels(userId) {
     return single(`/users/${userId}/channels`);
 }
+exports.usersIdChannels = usersIdChannels;
 /**
  * @param {Snowflake | string} userId The ID of the user.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function usersIdGuilds(userId) {
+function usersIdGuilds(userId) {
     return single(`/users/${userId}/guilds`);
 }
+exports.usersIdGuilds = usersIdGuilds;
 /**
  * @param {Snowflake | string} userId The ID of the user.
  * @param {Snowflake} guildId The ID of the guild.
@@ -485,29 +531,32 @@ export function usersIdGuilds(userId) {
  * @export
  * @function
  */
-export function usersIdGuildsId(userId, guildId) {
+function usersIdGuildsId(userId, guildId) {
     return {
         bucket: `/users/${userId}/guilds/{}`,
         path: `/users/${userId}/guilds/${guildId}`,
     };
 }
+exports.usersIdGuildsId = usersIdGuildsId;
 /**
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function voiceRegions() {
+function voiceRegions() {
     return single(`/voice/regions`);
 }
+exports.voiceRegions = voiceRegions;
 /**
  * @param {Snowflake} userId The ID of the webhook.
  * @returns {RouteInfo}
  * @export
  * @function
  */
-export function webhooksId(webhookId) {
+function webhooksId(webhookId) {
     return single(`/webhooks/${webhookId}`);
 }
+exports.webhooksId = webhooksId;
 /**
  * @param {Snowflake} userId The ID of the webhook.
  * @param {string} token The webhook's token.
@@ -515,10 +564,11 @@ export function webhooksId(webhookId) {
  * @export
  * @function
  */
-export function webhooksIdToken(webhookId, token) {
+function webhooksIdToken(webhookId, token) {
     return {
         bucket: `/webhooks/${webhookId}/{}`,
         path: `/webhooks/${webhookId}/${token}`,
     };
 }
+exports.webhooksIdToken = webhooksIdToken;
 //# sourceMappingURL=Routes.js.map

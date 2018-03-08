@@ -4,7 +4,7 @@
     "declarationDir": "./",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "es6",
+    "module": "commonjs",
     "lib": ["es5", "es2017"],
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,

@@ -1,4 +1,6 @@
-import BaseResource from "../Abstracts/BaseResource";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const BaseResource_1 = require("../Abstracts/BaseResource");
 /**
  * @class
  * @default
@@ -6,7 +8,7 @@ import BaseResource from "../Abstracts/BaseResource";
  * @extends {BaseResource}
  * @name Channel
  */
-export default class Channel extends BaseResource {
+class Channel extends BaseResource_1.default {
     /**
      *
      * @param {Water} client
@@ -20,4 +22,5 @@ export default class Channel extends BaseResource {
         super(client);
     }
 }
+exports.default = Channel;
 //# sourceMappingURL=Channel.js.map

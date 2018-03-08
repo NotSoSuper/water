@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * The supported REST API version.
  *
@@ -5,7 +7,7 @@
  * @export
  * @type {number}
  */
-export const API_VERSION = 7;
+exports.API_VERSION = 7;
 /**
  * The base path of the API. Uses the version set to `API_VERSION`.
  *
@@ -13,7 +15,7 @@ export const API_VERSION = 7;
  * @export
  * @type {string}
  */
-export const API_BASE_PATH = `/v${API_VERSION}`;
+exports.API_BASE_PATH = `/v${exports.API_VERSION}`;
 /**
  * The host of the API.
  *
@@ -21,7 +23,7 @@ export const API_BASE_PATH = `/v${API_VERSION}`;
  * @export
  * @type {string}
  */
-export const API_HOST = "discordapp.com";
+exports.API_HOST = "discordapp.com";
 /**
  * The protocol of the API.
  *
@@ -29,7 +31,7 @@ export const API_HOST = "discordapp.com";
  * @export
  * @type {string}
  */
-export const API_PROTOCOL = "https";
+exports.API_PROTOCOL = "https";
 /**
  * The base URI of the API.
  *
@@ -37,7 +39,7 @@ export const API_PROTOCOL = "https";
  * @export
  * @type {string}
  */
-export const API_BASE = `https://${API_HOST}/api${API_BASE_PATH}`;
+exports.API_BASE = `https://${exports.API_HOST}/api${exports.API_BASE_PATH}`;
 /**
  * The host of the CDN.
  *
@@ -45,7 +47,7 @@ export const API_BASE = `https://${API_HOST}/api${API_BASE_PATH}`;
  * @export
  * @type {string}
  */
-export const CDN_HOST = "cdn.discordapp.com";
+exports.CDN_HOST = "cdn.discordapp.com";
 /**
  * The base URI of the CDN.
  *
@@ -53,5 +55,5 @@ export const CDN_HOST = "cdn.discordapp.com";
  * @export
  * @type {string}
  */
-export const CDN_BASE = `https://${CDN_HOST}`;
+exports.CDN_BASE = `https://${exports.CDN_HOST}`;
 //# sourceMappingURL=Constants.js.map

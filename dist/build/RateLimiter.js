@@ -1,4 +1,6 @@
-import { Bucket } from "branches";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const branches_1 = require("branches");
 /**
  * Container for path-specific buckets and retrieving tickets from them.
  *
@@ -8,7 +10,7 @@ import { Bucket } from "branches";
  * @export
  * @name RateLimiter
  */
-export default class RateLimiter {
+class RateLimiter {
     constructor() {
         /**
          * Map containing the buckets, keyed by their path.
@@ -49,7 +51,7 @@ export default class RateLimiter {
      */
     get(bucketIdentifier) {
         if (!this.buckets.has(bucketIdentifier)) {
-            this.buckets.set(bucketIdentifier, new Bucket());
+            this.buckets.set(bucketIdentifier, new branches_1.Bucket());
         }
         // Guarenteed to never be undefined.
         return this.buckets.get(bucketIdentifier);
@@ -120,4 +122,5 @@ export default class RateLimiter {
         await bucket.take();
     }
 }
+exports.default = RateLimiter;
 //# sourceMappingURL=RateLimiter.js.map

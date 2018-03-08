@@ -1,4 +1,6 @@
-import { ReactionType } from "discord-models/channel";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const channel_1 = require("discord-models/channel");
 /**
  * Parses a reaction into data that can be passed as a URL query parameter.
  *
@@ -7,9 +9,9 @@ import { ReactionType } from "discord-models/channel";
  * @export
  * @function
  */
-export function parseReaction(reaction) {
+function parseReaction(reaction) {
     let data;
-    if (reaction.type === ReactionType.Custom) {
+    if (reaction.type === channel_1.ReactionType.Custom) {
         reaction = reaction;
         data = `${reaction.id}:${reaction.name}`;
     }
@@ -19,4 +21,5 @@ export function parseReaction(reaction) {
     }
     return encodeURIComponent(data);
 }
+exports.parseReaction = parseReaction;
 //# sourceMappingURL=utils.js.map
