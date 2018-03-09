@@ -15,7 +15,7 @@ exports.API_VERSION = 7;
  * @export
  * @type {string}
  */
-exports.API_BASE_PATH = `/v${exports.API_VERSION}`;
+exports.API_BASE_PATH = `/api/v${exports.API_VERSION}`;
 /**
  * The host of the API.
  *

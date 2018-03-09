@@ -14,7 +14,7 @@ export const API_VERSION = 7;
  * @export
  * @type {string}
  */
-export const API_BASE_PATH = `/v${API_VERSION}`;
+export const API_BASE_PATH = `/api/v${API_VERSION}`;
 
 /**
  * The host of the API.
