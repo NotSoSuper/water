@@ -415,7 +415,13 @@ export default class Water {
     public deleteWebhookWithToken(webhookId: Snowflake, token: string): Promise<null> {
         const info = Routes.webhooksIdToken(webhookId, token);
 
-        return this.request("delete", info.bucket, info.path, null, false);
+        return this.requestDeserialize(
+            "delete",
+            info.bucket,
+            info.path,
+            null,
+            false,
+        );
     }
 
     public editChannel(channelId: Snowflake, options: Options.ChannelOptions): Promise<Guild.GuildChannel> {
@@ -516,7 +522,7 @@ export default class Water {
     ): Promise<Channel.Webhook> {
         const info = Routes.webhooksIdToken(webhookId, token);
 
-        return this.request("delete", info.bucket, info.path, options, false);
+        return this.requestDeserialize("delete", info.bucket, info.path, options, false);
     }
 
     public executeWebhook(
@@ -531,7 +537,7 @@ export default class Water {
             info.path += `?wait=${wait}`;
         }
 
-        return this.request("patch", info.bucket, info.path, options, false);
+        return this.requestDeserialize("patch", info.bucket, info.path, options, false);
     }
 
     public getAuditLogs(
@@ -814,7 +820,7 @@ export default class Water {
      * @public
      */
     public delete<T>(route: RouteInfo): Promise<T> {
-        return this.request("delete", route.bucket, route.path);
+        return this.requestDeserialize("delete", route.bucket, route.path);
     }
 
     /**
@@ -827,7 +833,7 @@ export default class Water {
      * @public
      */
     public get<T>(route: RouteInfo): Promise<T> {
-        return this.request("get", route.bucket, route.path);
+        return this.requestDeserialize("get", route.bucket, route.path);
     }
 
     /**
@@ -841,7 +847,7 @@ export default class Water {
      * @public
      */
     public patch<T>(route: RouteInfo, body: any = null): Promise<T> {
-        return this.request("patch", route.bucket, route.path, body);
+        return this.requestDeserialize("patch", route.bucket, route.path, body);
     }
 
     /**
@@ -855,7 +861,7 @@ export default class Water {
      * @public
      */
     public post<T>(route: RouteInfo, body: any = null): Promise<T> {
-        return this.request("post", route.bucket, route.path, body);
+        return this.requestDeserialize("post", route.bucket, route.path, body);
     }
 
     /**
@@ -869,7 +875,39 @@ export default class Water {
      * @public
      */
     public put<T>(route: RouteInfo, body: any = null): Promise<T> {
-        return this.request("put", route.bucket, route.path, body);
+        return this.requestDeserialize("put", route.bucket, route.path, body);
+    }
+
+    /**
+     * A light wrpper over `request` that takes the resultant response body and
+     * deserializes it.
+     *
+     * @param {Method} method
+     * @param {string} bucketIdentifier
+     * @param {string} path
+     * @param {any} [body=null]
+     * @param {boolean} [auth=true]
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @public
+     */
+    public requestDeserialize<T>(
+        method: Method,
+        bucketIdentifier: string,
+        path: string,
+        body: any = null,
+        auth: boolean = true,
+    ): Promise<T> {
+        return this.request(
+            method,
+            bucketIdentifier,
+            path,
+            body,
+            auth,
+        ).then(([, data]) => {
+            return JSON.parse(data);
+        });
     }
 
     /**
@@ -883,20 +921,21 @@ export default class Water {
      * PATCH/POST/PUT requests.
      * @param {boolean} [auth=true] Whether to use the internally configured bot
      * token.
-     * @returns {Promise.<T>} A promise that will resolve to the defined type
-     * after JSON parsing, if a response body exists.
+     * @returns {Promise.<[http.ClientResponse, string | null]>} A promise that
+     * will resolve to the response object as well as, optionally, chunked
+     * response body data.
      * @async
      * @memberof Water
      * @method
      * @public
      */
-    public async request<T>(
+    public async request(
         method: Method,
         bucketIdentifier: string,
         path: string,
         body: any = null,
         auth: boolean = true,
-    ): Promise<T> {
+    ): Promise<[http.ClientResponse, string]> {
         await this.rateLimiter.take(bucketIdentifier);
 
         const headers: RequestHeaders = {
@@ -908,7 +947,7 @@ export default class Water {
             headers.Authorization = this.token;
         }
 
-        return new Promise<T>((resolve, reject) => {
+        return new Promise<[http.ClientResponse, string]>((resolve, reject) => {
             const request = https.request({
                 headers: {
                     "Authorization": this.token,
@@ -916,7 +955,7 @@ export default class Water {
                 },
                 host: this.requestHost,
                 method,
-                path: `${this.requestPath}/${path}`,
+                path: `${this.requestPath}${path}`,
                 protocol: this.requestProtocol,
             });
 
@@ -934,19 +973,7 @@ export default class Water {
                 response.once("end", () => {
                     this.rateLimiter.process(bucketIdentifier, response);
 
-                    if (data.length === 0) {
-                        return resolve(undefined);
-                    }
-
-                    if (response.headers["Content-Type"] !== "application/json") {
-                        return resolve(undefined);
-                    }
-
-                    try {
-                        resolve(JSON.parse(data));
-                    } catch (e) {
-                        reject(e);
-                    }
+                    resolve([response, data]);
                 });
 
                 response.on("error", (e: Error) => {

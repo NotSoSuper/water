@@ -242,7 +242,7 @@ class Water {
     }
     deleteWebhookWithToken(webhookId, token) {
         const info = Routes.webhooksIdToken(webhookId, token);
-        return this.request("delete", info.bucket, info.path, null, false);
+        return this.requestDeserialize("delete", info.bucket, info.path, null, false);
     }
     editChannel(channelId, options) {
         return this.patch(Routes.channelsId(channelId), options);
@@ -293,14 +293,14 @@ class Water {
     }
     editWebhookWithToken(webhookId, token, options) {
         const info = Routes.webhooksIdToken(webhookId, token);
-        return this.request("delete", info.bucket, info.path, options, false);
+        return this.requestDeserialize("delete", info.bucket, info.path, options, false);
     }
     executeWebhook(webhookId, token, wait, options) {
         const info = Routes.webhooksIdToken(webhookId, token);
         if (wait) {
             info.path += `?wait=${wait}`;
         }
-        return this.request("patch", info.bucket, info.path, options, false);
+        return this.requestDeserialize("patch", info.bucket, info.path, options, false);
     }
     getAuditLogs(guildId, actionType, userId, before, limit) {
         const info = Routes.guildsIdAuditLogs(guildId);
@@ -482,7 +482,7 @@ class Water {
      * @public
      */
     delete(route) {
-        return this.request("delete", route.bucket, route.path);
+        return this.requestDeserialize("delete", route.bucket, route.path);
     }
     /**
      * Performs a GET request.
@@ -494,7 +494,7 @@ class Water {
      * @public
      */
     get(route) {
-        return this.request("get", route.bucket, route.path);
+        return this.requestDeserialize("get", route.bucket, route.path);
     }
     /**
      * Performs a PATCH request.
@@ -507,7 +507,7 @@ class Water {
      * @public
      */
     patch(route, body = null) {
-        return this.request("patch", route.bucket, route.path, body);
+        return this.requestDeserialize("patch", route.bucket, route.path, body);
     }
     /**
      * Performs a POST request.
@@ -520,7 +520,7 @@ class Water {
      * @public
      */
     post(route, body = null) {
-        return this.request("post", route.bucket, route.path, body);
+        return this.requestDeserialize("post", route.bucket, route.path, body);
     }
     /**
      * Performs a PUT request.
@@ -533,7 +533,26 @@ class Water {
      * @public
      */
     put(route, body = null) {
-        return this.request("put", route.bucket, route.path, body);
+        return this.requestDeserialize("put", route.bucket, route.path, body);
+    }
+    /**
+     * A light wrpper over `request` that takes the resultant response body and
+     * deserializes it.
+     *
+     * @param {Method} method
+     * @param {string} bucketIdentifier
+     * @param {string} path
+     * @param {any} [body=null]
+     * @param {boolean} [auth=true]
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @public
+     */
+    requestDeserialize(method, bucketIdentifier, path, body = null, auth = true) {
+        return this.request(method, bucketIdentifier, path, body, auth).then(([, data]) => {
+            return JSON.parse(data);
+        });
     }
     /**
      * Performs a request to the Discord REST API.
@@ -546,8 +565,9 @@ class Water {
      * PATCH/POST/PUT requests.
      * @param {boolean} [auth=true] Whether to use the internally configured bot
      * token.
-     * @returns {Promise.<T>} A promise that will resolve to the defined type
-     * after JSON parsing, if a response body exists.
+     * @returns {Promise.<[http.ClientResponse, string | null]>} A promise that
+     * will resolve to the response object as well as, optionally, chunked
+     * response body data.
      * @async
      * @memberof Water
      * @method
@@ -570,7 +590,7 @@ class Water {
                 },
                 host: this.requestHost,
                 method,
-                path: `${this.requestPath}/${path}`,
+                path: `${this.requestPath}${path}`,
                 protocol: this.requestProtocol,
             });
             request.once("error", (e) => {
@@ -583,18 +603,7 @@ class Water {
                 });
                 response.once("end", () => {
                     this.rateLimiter.process(bucketIdentifier, response);
-                    if (data.length === 0) {
-                        return resolve(undefined);
-                    }
-                    if (response.headers["Content-Type"] !== "application/json") {
-                        return resolve(undefined);
-                    }
-                    try {
-                        resolve(JSON.parse(data));
-                    }
-                    catch (e) {
-                        reject(e);
-                    }
+                    resolve([response, data]);
                 });
                 response.on("error", (e) => {
                     reject(e);

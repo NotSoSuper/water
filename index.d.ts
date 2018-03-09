@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Snowflake } from "discord-models";
 import * as Application from "discord-models/application";
 import * as Channel from "discord-models/channel";
@@ -5,6 +6,7 @@ import * as Gateway from "discord-models/gateway";
 import * as Guild from "discord-models/guild";
 import * as User from "discord-models/user";
 import * as Voice from "discord-models/voice";
+import * as http from "http";
 import RateLimiter from "./RateLimiter";
 import * as Options from "./Routing/Options";
 import { RouteInfo } from "./Routing/Routes";
@@ -322,6 +324,21 @@ export default class Water {
      */
     put<T>(route: RouteInfo, body?: any): Promise<T>;
     /**
+     * A light wrpper over `request` that takes the resultant response body and
+     * deserializes it.
+     *
+     * @param {Method} method
+     * @param {string} bucketIdentifier
+     * @param {string} path
+     * @param {any} [body=null]
+     * @param {boolean} [auth=true]
+     * @returns {Promise.<T>}
+     * @memberof Water
+     * @method
+     * @public
+     */
+    requestDeserialize<T>(method: Method, bucketIdentifier: string, path: string, body?: any, auth?: boolean): Promise<T>;
+    /**
      * Performs a request to the Discord REST API.
      *
      * @param {Method} method The request verb to use, e.g. `get`.
@@ -332,12 +349,13 @@ export default class Water {
      * PATCH/POST/PUT requests.
      * @param {boolean} [auth=true] Whether to use the internally configured bot
      * token.
-     * @returns {Promise.<T>} A promise that will resolve to the defined type
-     * after JSON parsing, if a response body exists.
+     * @returns {Promise.<[http.ClientResponse, string | null]>} A promise that
+     * will resolve to the response object as well as, optionally, chunked
+     * response body data.
      * @async
      * @memberof Water
      * @method
      * @public
      */
-    request<T>(method: Method, bucketIdentifier: string, path: string, body?: any, auth?: boolean): Promise<T>;
+    request(method: Method, bucketIdentifier: string, path: string, body?: any, auth?: boolean): Promise<[http.ClientResponse, string]>;
 }
