@@ -29,7 +29,7 @@ export declare const API_HOST = "discordapp.com";
  * @export
  * @type {string}
  */
-export declare const API_PROTOCOL = "https";
+export declare const API_PROTOCOL = "https:";
 /**
  * The base URI of the API.
  *

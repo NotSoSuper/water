@@ -31,7 +31,7 @@ exports.API_HOST = "discordapp.com";
  * @export
  * @type {string}
  */
-exports.API_PROTOCOL = "https";
+exports.API_PROTOCOL = "https:";
 /**
  * The base URI of the API.
  *
