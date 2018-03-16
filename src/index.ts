@@ -981,6 +981,10 @@ export default class Water {
                 });
             });
 
+            if (typeof body === "object") {
+                body = JSON.stringify(body);
+            }
+
             if (body) {
                 request.write(body);
             }
